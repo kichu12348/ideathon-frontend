@@ -128,3 +128,18 @@
   width: 150px;
   height: 20px;
 }
+
+.screenshot {
+  max-width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  margin-top: 0.5rem;
+  transition: opacity 0.2s ease;
+  background-color: var(--bg-color);
+}
+
+.screenshot:hover {
+  opacity: 0.85;
+}

@@ -4,6 +4,8 @@ import { teamService } from "../../api/teamService";
 import type { TeamDetailResponse } from "../../types/api";
 import styles from "./TeamDetail.module.css";
 
+const BUCKET_URL = import.meta.env.VITE_PUBLIC_BUCKET_URL!;
+
 export const TeamDetail = () => {
   const { teamId } = useParams<{ teamId: string }>();
   const [data, setData] = useState<TeamDetailResponse | null>(null);
@@ -111,11 +113,15 @@ export const TeamDetail = () => {
             <span className={styles.label}>Payment Screenshot</span>
             <span className={styles.value}>
               <a
-                href={team.payment_screenshot}
+                href={`${BUCKET_URL}/${team.payment_screenshot}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                View Receipt
+                <img
+                  src={`${BUCKET_URL}/${team.payment_screenshot}`}
+                  alt="Payment Receipt"
+                  className={styles.screenshot}
+                />
               </a>
             </span>
           </div>
