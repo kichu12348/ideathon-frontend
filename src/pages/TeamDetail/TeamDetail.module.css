@@ -34,7 +34,7 @@
   border-radius: 8px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .sectionTitle {
@@ -77,10 +77,12 @@
   border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
 }
 
 .table th {
@@ -95,7 +97,8 @@
   border-bottom: none;
 }
 
-.loading, .error {
+.loading,
+.error {
   text-align: center;
   padding: 3rem;
   font-size: 1.2rem;
