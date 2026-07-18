@@ -1,0 +1,456 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-color);
+}
+
+/* ─── Top bar ─────────────────────────────────────────────── */
+.topBar {
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: 0.6rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topBarInner {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--bg-color);
+  font-size: 0.88rem;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  opacity: 1;
+}
+
+.topBarTitle {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Content ──────────────────────────────────────────────── */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.section {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sectionTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+/* ─── Public URL bar ───────────────────────────────────────── */
+.publicUrlBar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--muted-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1.25rem;
+  min-width: 0;
+}
+
+.publicUrlIcon {
+  color: var(--muted-color);
+  flex-shrink: 0;
+}
+
+.publicUrlText {
+  font-family: monospace;
+  font-size: 0.88rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── Form ─────────────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.inputPrefix {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--muted-bg);
+}
+
+.prefix {
+  padding: 0 0.6rem;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  white-space: nowrap;
+  border-right: 1px solid var(--border-color);
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.inputPrefix .input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: var(--surface-color);
+  color: var(--text-color);
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(51, 51, 51, 0.08);
+}
+
+.input:disabled {
+  background: var(--muted-bg);
+  color: var(--muted-color);
+  cursor: not-allowed;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Buttons ──────────────────────────────────────────────── */
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.primaryBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.primaryBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dangerBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--danger-bg);
+  color: var(--danger-color);
+  border: 1px solid var(--danger-color);
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dangerBtn:hover:not(:disabled) {
+  background: var(--danger-color);
+  color: #fff;
+}
+
+.dangerBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ghostBtn {
+  background: none;
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--muted-color);
+  transition: background 0.15s;
+}
+
+.ghostBtn:hover {
+  background: var(--muted-bg);
+}
+
+.addSubBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1.5px dashed var(--border-color);
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--muted-color);
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.addSubBtn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-color);
+}
+
+/* ─── Sub-link form ────────────────────────────────────────── */
+.subForm {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--muted-bg);
+}
+
+.subFormHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.subFormHeader h3 {
+  font-size: 0.9rem;
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted-color);
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition:
+    color 0.1s,
+    background 0.1s;
+}
+
+.closeBtn:hover {
+  color: var(--text-color);
+  background: var(--border-color);
+}
+
+/* ─── Sub-links list ───────────────────────────────────────── */
+.subList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.subCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-color);
+}
+
+.subLeft {
+  flex: 1;
+  min-width: 0;
+}
+
+.subSlugRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+  min-width: 0;
+}
+
+.subSlugBadge {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--muted-bg);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.subSlugBase {
+  color: var(--muted-color);
+  font-weight: 400;
+}
+
+.copyBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.3rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--muted-color);
+  flex-shrink: 0;
+  transition:
+    background 0.1s,
+    color 0.1s;
+}
+
+.copyBtn:hover {
+  background: var(--muted-bg);
+  color: var(--text-color);
+}
+
+.subRedirectUrl {
+  font-size: 0.82rem;
+  color: var(--muted-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subActions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.iconActionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--muted-color);
+  transition:
+    background 0.1s,
+    color 0.1s,
+    border-color 0.1s;
+}
+
+.iconActionBtn:hover {
+  background: var(--muted-bg);
+  color: var(--text-color);
+}
+
+.iconActionBtn.danger:hover {
+  background: var(--danger-bg);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.emptyText {
+  color: var(--muted-color);
+  font-size: 0.88rem;
+  padding: 0.5rem 0;
+}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .topBar {
+    padding: 0.6rem 1rem;
+  }
+
+  .section {
+    padding: 1.1rem 1rem;
+  }
+
+  .formRow {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,304 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-color);
+}
+
+/* ─── Top bar ─────────────────────────────────────────────── */
+.topBar {
+  background: var(--text-color);
+  color: var(--bg-color);
+  padding: 0.6rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topBarInner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.baseUrlPill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.15s;
+  overflow: hidden;
+}
+
+.baseUrlPill:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.baseUrlText {
+  font-family: monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
+}
+
+/* ─── Page content ─────────────────────────────────────────── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.pageTitle {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pageSubtitle {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--surface-color);
+  cursor: pointer;
+  transition: background 0.15s;
+  color: var(--text-color);
+}
+
+.iconButton:hover {
+  background: var(--muted-bg);
+}
+
+.createButton {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--text-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+
+.createButton:hover {
+  opacity: 0.85;
+}
+
+/* ─── List ─────────────────────────────────────────────────── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.linkCard {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.linkCard:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  border-color: #bbb;
+}
+
+.skeletonCard {
+  cursor: default;
+  min-height: 80px;
+  padding: 1.25rem;
+}
+
+.cardLeft {
+  flex: 1;
+  min-width: 0; /* allows text-overflow to work */
+}
+
+.slugRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  min-width: 0;
+}
+
+.slugBadge {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: var(--muted-bg);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.slugBase {
+  color: var(--muted-color);
+  font-weight: 400;
+}
+
+.copyBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.2rem 0.35rem;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--muted-color);
+  transition: background 0.1s, color 0.1s;
+  flex-shrink: 0;
+}
+
+.copyBtn:hover {
+  background: var(--muted-bg);
+  color: var(--text-color);
+}
+
+.redirectUrl {
+  color: var(--muted-color);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.dateText {
+  font-size: 0.78rem;
+  color: #999;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.editChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-color);
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+
+.editChevron:hover {
+  color: var(--text-color);
+  background: var(--muted-bg);
+}
+
+/* ─── Spin animation ────────────────────────────────────────── */
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Empty state ──────────────────────────────────────────── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1.5px dashed var(--border-color);
+  border-radius: 12px;
+  gap: 0.75rem;
+}
+
+.emptyIcon {
+  color: var(--border-color);
+}
+
+.emptyState h2 {
+  font-size: 1.25rem;
+  color: var(--text-color);
+}
+
+.emptyState p {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ─── Responsive ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.25rem 1rem;
+  }
+
+  .topBar {
+    padding: 0.6rem 1rem;
+  }
+
+  .baseUrlText {
+    max-width: 130px;
+  }
+
+  .linkCard {
+    padding: 0.9rem 1rem;
+  }
+
+  /* On small screens show just /slug — full URL stays in the copy button */
+  .slugBase {
+    display: none;
+  }
+}

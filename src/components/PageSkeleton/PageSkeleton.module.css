@@ -1,0 +1,59 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.title {
+  height: 2.25rem;
+  width: 40%;
+  max-width: 320px;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.cardTitle {
+  height: 1.5rem;
+  width: 70%;
+  margin-bottom: 1rem;
+}
+
+.cardText {
+  height: 1rem;
+  width: 90%;
+  margin-bottom: 0.5rem;
+}
+
+.cardTextShort {
+  height: 1rem;
+  width: 60%;
+  margin-bottom: 1.25rem;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardDate {
+  height: 0.875rem;
+  width: 30%;
+}
+
+.cardButton {
+  height: 2rem;
+  width: 6rem;
+}
