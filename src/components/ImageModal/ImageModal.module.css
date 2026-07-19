@@ -1,0 +1,26 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+}
+
+.modalContent {
+  width: min(90vw, 1200px);
+  height: min(90svh, 800px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modalImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

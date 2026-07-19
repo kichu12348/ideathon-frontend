@@ -11,12 +11,15 @@
   --success-color: #27ae60;
   --success-bg: #f2fdf6;
   --link-color: #2563eb;
+  --scroll-wid: thin;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scrollbar-width: var(--scroll-wid);
+  scrollbar-color: var(--muted-color) var(--bg-color);
 }
 
 body {
@@ -26,8 +29,6 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
-  scrollbar-width: thin;
-  scrollbar-color: var(--text-color) var(--bg-color);
   /* hide scrollbar, only show when scrolling */
 }
 

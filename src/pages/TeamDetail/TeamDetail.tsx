@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { teamService } from "../../api/teamService";
+import { buildBucketUrl } from "../../config/redirect";
 import type { TeamDetailResponse } from "../../types/api";
+import ImageModal from "../../components/ImageModal";
 import styles from "./TeamDetail.module.css";
-
-const BUCKET_URL = import.meta.env.VITE_PUBLIC_BUCKET_URL!;
 
 export const TeamDetail = () => {
   const { teamId } = useParams<{ teamId: string }>();
   const [data, setData] = useState<TeamDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTeamDetail = async () => {
@@ -113,12 +114,13 @@ export const TeamDetail = () => {
             <span className={styles.label}>Payment Screenshot</span>
             <span className={styles.value}>
               <a
-                href={`${BUCKET_URL}/${team.payment_screenshot}`}
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsModalOpen(true);
+                }}
               >
                 <img
-                  src={`${BUCKET_URL}/${team.payment_screenshot}`}
+                  src={buildBucketUrl(team.payment_screenshot)}
                   alt="Payment Receipt"
                   className={styles.screenshot}
                 />
@@ -157,6 +159,13 @@ export const TeamDetail = () => {
           </div>
         )}
       </div>
+      {team && (
+        <ImageModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          imageUrl={buildBucketUrl(team.payment_screenshot)}
+        />
+      )}
     </div>
   );
 };
