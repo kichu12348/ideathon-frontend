@@ -13,7 +13,7 @@ export const EventsList = () => {
     const fetchEvents = async () => {
       try {
         const data = await eventService.getAllEvents();
-        setEvents(data.events || []);
+        setEvents(data || []);
       } catch (err) {
         setError(
           err instanceof Error ? err.message : "An unknown error occurred",
@@ -58,7 +58,9 @@ export const EventsList = () => {
         <div className={styles.grid}>
           {events.map((event) => (
             <div key={event.eventName} className={styles.card}>
-              <div className={styles.eventName}>{event.eventName.replace(/-/g, ' ')}</div>
+              <div className={styles.eventName}>
+                {event.eventName.replace(/-/g, " ")}
+              </div>
               <div className={styles.gamesInfo}>
                 <p>Games Included:</p>
                 <div className={styles.gamesList}>
@@ -70,7 +72,10 @@ export const EventsList = () => {
                 </div>
               </div>
               <div className={styles.cardFooter}>
-                <Link to={`/events/${event.eventName}`} className={styles.viewButton}>
+                <Link
+                  to={`/events/${event.eventName}`}
+                  className={styles.viewButton}
+                >
                   View Event
                 </Link>
               </div>

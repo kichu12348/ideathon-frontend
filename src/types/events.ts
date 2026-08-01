@@ -3,9 +3,7 @@ export interface EventItem {
   games: string[];
 }
 
-export interface EventsResponse {
-  events: EventItem[];
-}
+export type EventsResponse = EventItem[];
 
 export interface EventStatsResponse {
   [gameName: string]: number;
