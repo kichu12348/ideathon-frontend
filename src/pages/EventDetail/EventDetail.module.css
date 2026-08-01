@@ -1,0 +1,229 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.backButton:hover {
+  color: #111827;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-color, #1a1a1a);
+  text-transform: capitalize;
+}
+
+.statsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.statCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  min-width: 200px;
+  flex: 1;
+}
+
+.statGame {
+  font-size: 1rem;
+  color: #6b7280;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.statCount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.filterSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.filterSection h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Radix Dropdown styles */
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 0 15px;
+  font-size: 14px;
+  line-height: 1;
+  height: 35px;
+  gap: 5px;
+  background-color: white;
+  color: #374151;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+}
+
+.dropdownTrigger:hover {
+  background-color: #f9fafb;
+}
+
+.dropdownContent {
+  min-width: 220px;
+  background-color: white;
+  border-radius: 6px;
+  padding: 5px;
+  box-shadow:
+    0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  border: 1px solid #e5e7eb;
+}
+
+.dropdownItem {
+  font-size: 14px;
+  line-height: 1;
+  color: #374151;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 5px;
+  position: relative;
+  padding-left: 25px;
+  user-select: none;
+  outline: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.dropdownItem:hover,
+.dropdownItem[data-highlighted] {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.dropdownItemIndicator {
+  position: absolute;
+  left: 0;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Teams Table */
+.tableContainer {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f9fafb;
+  padding: 1rem;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  color: #111827;
+}
+
+.table tr:hover {
+  background-color: #f9fafb;
+}
+
+.viewLink {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.viewLink::after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 1.5px;
+  background-color: black;
+  transition: all 0.2s ease-in-out;
+}
+
+.viewLink:hover::after {
+  transform: translateX(-50%) scaleX(1);
+  width: 100%;
+}
+
+.error {
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Skeletons */
+.skeletonTitle {
+  width: 300px;
+  height: 2.5rem;
+  border-radius: 8px;
+}
+
+.skeletonStat {
+  width: 100%;
+  height: 100px;
+  border-radius: 12px;
+}
+
+.skeletonTable {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+}

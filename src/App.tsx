@@ -13,6 +13,21 @@ const TeamDetail = lazy(() =>
     default: m.TeamDetail,
   })),
 );
+const EventsList = lazy(() =>
+  import("./pages/EventsList/EventsList").then((m) => ({
+    default: m.EventsList,
+  })),
+);
+const EventDetail = lazy(() =>
+  import("./pages/EventDetail/EventDetail").then((m) => ({
+    default: m.EventDetail,
+  })),
+);
+const EventTeamDetail = lazy(() =>
+  import("./pages/EventTeamDetail/EventTeamDetail").then((m) => ({
+    default: m.EventTeamDetail,
+  })),
+);
 const RedirectsList = lazy(() =>
   import("./pages/RedirectsList/RedirectsList").then((m) => ({
     default: m.RedirectsList,
@@ -53,6 +68,9 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<TeamsList />} />
           <Route path="/team/:teamId" element={<TeamDetail />} />
+          <Route path="/events" element={<EventsList />} />
+          <Route path="/events/:eventName" element={<EventDetail />} />
+          <Route path="/events/:eventName/:id" element={<EventTeamDetail />} />
         </Route>
         <Route element={<BareLayout />}>
           <Route path="/redirects" element={<RedirectsList />} />

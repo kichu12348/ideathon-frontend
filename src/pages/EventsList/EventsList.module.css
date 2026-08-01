@@ -1,0 +1,138 @@
+.container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--text-color, #1a1a1a);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.eventName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111827;
+  text-transform: capitalize;
+}
+
+.gamesInfo {
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.gamesInfo p {
+  color: #4b5563;
+  margin: 0 0 0.5rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.gamesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.gameBadge {
+  background: #f3f4f6;
+  color: #374151;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.viewButton {
+  background: transparent;
+  color: black;
+  padding: 0.5rem 1rem;
+  border: 1px solid black;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.viewButton:hover {
+  background-color: black;
+  color: white;
+}
+
+.error {
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Skeletons */
+.skeletonTitle {
+  width: 250px;
+  height: 2.5rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.skeletonCardTitle {
+  width: 70%;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.skeletonCardText {
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.skeletonCardButton {
+  width: 100px;
+  height: 2rem;
+  border-radius: 6px;
+}

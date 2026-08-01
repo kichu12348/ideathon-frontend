@@ -1,0 +1,155 @@
+.container {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #4b5563;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.backButton:hover {
+  color: #111827;
+}
+
+.header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color, #1a1a1a);
+  margin-bottom: 0.5rem;
+}
+
+.date {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #111827;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.value {
+  font-size: 1rem;
+  color: #111827;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+.screenshot {
+  max-width: 200px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.screenshot:hover {
+  transform: scale(1.05);
+}
+
+.tableContainer {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.table th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.error {
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #f87171;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* Skeletons */
+.skeletonTitle {
+  width: 300px;
+  height: 3rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.skeletonSubtitle {
+  width: 200px;
+  height: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 4px;
+}
+
+.skeletonLabel {
+  width: 80px;
+  height: 1rem;
+  border-radius: 4px;
+}
+
+.skeletonValue {
+  width: 150px;
+  height: 1.5rem;
+  border-radius: 4px;
+}

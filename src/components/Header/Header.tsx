@@ -9,6 +9,7 @@ export const Header = () => {
       </div>
       <nav className={styles.nav}>
         <Link to="/">Teams</Link>
+        <Link to="/events">Events</Link>
         <Link to="/redirects">Redirects</Link>
       </nav>
     </header>
