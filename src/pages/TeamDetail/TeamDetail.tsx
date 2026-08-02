@@ -1,10 +1,28 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { FiExternalLink } from "react-icons/fi";
+import * as Tooltip from "@radix-ui/react-tooltip";
 import { teamService } from "../../api/teamService";
 import { buildBucketUrl } from "../../config/redirect";
 import type { TeamDetailResponse } from "../../types/api";
 import ImageModal from "../../components/ImageModal";
 import styles from "./TeamDetail.module.css";
+
+const TooltipValue = ({ value }: { value: string }) => (
+  <Tooltip.Provider delayDuration={300}>
+    <Tooltip.Root>
+      <Tooltip.Trigger asChild>
+        <span className={styles.value}>{value}</span>
+      </Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Content className={styles.tooltipContent} sideOffset={6}>
+          {value}
+          <Tooltip.Arrow className={styles.tooltipArrow} />
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    </Tooltip.Root>
+  </Tooltip.Provider>
+);
 
 export const TeamDetail = () => {
   const { teamId } = useParams<{ teamId: string }>();
@@ -82,19 +100,19 @@ export const TeamDetail = () => {
         <div className={styles.grid}>
           <div className={styles.field}>
             <span className={styles.label}>Name</span>
-            <span className={styles.value}>{team.leader_name}</span>
+            <TooltipValue value={team.leader_name} />
           </div>
           <div className={styles.field}>
             <span className={styles.label}>Email</span>
-            <span className={styles.value}>{team.leader_email}</span>
+            <TooltipValue value={team.leader_email} />
           </div>
           <div className={styles.field}>
             <span className={styles.label}>Phone</span>
-            <span className={styles.value}>{team.leader_phone}</span>
+            <TooltipValue value={team.leader_phone} />
           </div>
           <div className={styles.field}>
             <span className={styles.label}>College</span>
-            <span className={styles.value}>{team.leader_college}</span>
+            <TooltipValue value={team.leader_college} />
           </div>
         </div>
       </div>
@@ -104,11 +122,34 @@ export const TeamDetail = () => {
         <div className={styles.grid}>
           <div className={styles.field}>
             <span className={styles.label}>UPI ID</span>
-            <span className={styles.value}>{team.upi_id}</span>
+            <TooltipValue value={team.upi_id} />
           </div>
           <div className={styles.field}>
             <span className={styles.label}>Referral Code</span>
-            <span className={styles.value}>{team.referral_code || "N/A"}</span>
+            <TooltipValue value={team.referral_code || "N/A"} />
+          </div>
+          <div className={styles.field}>
+            <span className={styles.label}>Submission</span>
+            <span className={styles.value}>
+              {team.submission && team.submission.trim() !== "" ? (
+                <div className={styles.submissionRow}>
+                  <span className={styles.submissionDomain}>
+                    {new URL(team.submission).hostname.replace(/^www\./, "")}
+                  </span>
+                  <a
+                    href={team.submission}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.submissionBtn}
+                  >
+                    <FiExternalLink size={14} />
+                    Open
+                  </a>
+                </div>
+              ) : (
+                <span className={styles.noSubmission}>No submission yet</span>
+              )}
+            </span>
           </div>
           <div className={styles.field}>
             <span className={styles.label}>Payment Screenshot</span>

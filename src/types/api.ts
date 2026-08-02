@@ -6,6 +6,7 @@ export interface Team {
   leader_email: string;
   leader_phone: string;
   payment_screenshot: string;
+  submission: string;
   upi_id: string;
   referral_code: string;
   created_at: string;

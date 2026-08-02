@@ -60,6 +60,9 @@ export const TeamsList = () => {
         <div className={styles.grid}>
           {teams.map((team) => (
             <div key={team.id} className={styles.card}>
+              {team.submission.trim() !== "" && (
+                <span className={styles.hasSubmission}>✓ Submitted</span>
+              )}
               <div className={styles.teamName}>{team.team_name}</div>
               <div className={styles.leaderInfo}>
                 <p>Leader: {team.leader_name}</p>

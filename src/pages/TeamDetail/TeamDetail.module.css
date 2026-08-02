@@ -9,12 +9,41 @@
   padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
 .title {
   font-size: 2.5rem;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.date {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #6b7280;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .date {
+    align-self: flex-start;
+  }
 }
 
 .backButton {
@@ -65,6 +94,10 @@
 .value {
   font-size: 1.1rem;
   font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: default;
 }
 
 /* Members Table */
@@ -145,4 +178,80 @@
 
 .screenshot:hover {
   opacity: 0.85;
+}
+
+.submissionRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.submissionDomain {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-color);
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.submissionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background-color: #111;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #111;
+  transition:
+    background-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.submissionBtn:hover {
+  background-color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.noSubmission {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Radix Tooltip */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltipContent {
+  background-color: #111;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: 320px;
+  word-break: break-all;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  animation: tooltipFadeIn 0.15s ease;
+  z-index: 9999;
+}
+
+.tooltipArrow {
+  fill: #111;
 }
