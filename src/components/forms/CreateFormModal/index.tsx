@@ -52,11 +52,21 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
     setFormId((prev) => sanitizeFormId(prev));
   };
 
+  const handleCloseTimeChange = (value: string) => {
+    setCloseTime(value);
+    if (errorMsg) setErrorMsg("");
+  };
+
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
     const finalFormId = sanitizeFormId(formId);
     if (!finalFormId) {
       setErrorMsg("Form ID is required and must contain valid characters.");
+      return;
+    }
+
+    if (!closeTime || !closeTime.trim()) {
+      setErrorMsg("Closing Date & Time is required.");
       return;
     }
 
@@ -124,11 +134,11 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
         <div className={styles.fieldGroup}>
           <label className={styles.fieldLabel}>
             <FiCalendar size={14} />
-            <span>Closing Time (Optional)</span>
+            <span>Closing Time <span className={styles.required}>*</span></span>
           </label>
           <DateTimePicker
             value={closeTime}
-            onChange={setCloseTime}
+            onChange={handleCloseTimeChange}
             disabled={isSubmitting}
           />
         </div>

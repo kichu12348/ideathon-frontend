@@ -70,6 +70,11 @@ export function useFormValidity(initialFormId: string | undefined) {
       return null;
     }
 
+    if (!closeTime || !closeTime.trim()) {
+      toast.error("Closing date and time are required");
+      return null;
+    }
+
     try {
       setIsSaving(true);
       setError(null);
