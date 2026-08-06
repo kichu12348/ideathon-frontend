@@ -1,32 +1,159 @@
 .header {
-  background-color: var(--text-color);
-  color: var(--bg-color);
-  padding: 1rem 2rem;
+  background-color: var(--text-color, #111111);
+  color: var(--bg-color, #faf9f6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
-.nav {
+.logo a {
+  color: var(--bg-color, #faf9f6);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.logo a:hover {
+  opacity: 0.9;
+}
+
+/* Desktop Navigation */
+.desktopNav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
-.nav a {
-  color: var(--bg-color);
+.navLink {
+  color: #d1d5db;
   text-decoration: none;
   font-weight: 500;
-  transition: opacity 0.2s;
+  font-size: 0.925rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
 }
 
-.nav a:hover {
-  opacity: 0.8;
+.navLink:hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.activeNavLink {
+  color: #ffffff !important;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile Hamburger Button */
+.hamburgerBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--bg-color, #faf9f6);
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.hamburgerBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile Dropdown Menu */
+.mobileNavOverlay {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .hamburgerBtn {
+    display: flex;
+  }
+
+  .mobileNavOverlay {
+    display: block;
+    position: fixed;
+    top: 57px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 99;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .mobileNav {
+    background-color: var(--text-color, #111111);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    animation: slideDown 0.2s ease-out;
+  }
+
+  .mobileNavLink {
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: all 0.15s ease;
+  }
+
+  .mobileNavLink:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .activeMobileNavLink {
+    color: #ffffff !important;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

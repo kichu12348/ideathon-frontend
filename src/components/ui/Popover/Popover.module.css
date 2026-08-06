@@ -1,0 +1,21 @@
+.content {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+  z-index: 1000;
+  outline: none;
+  animation: popoverShow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popoverShow {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

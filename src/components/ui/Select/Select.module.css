@@ -1,0 +1,86 @@
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 42px;
+  padding: 0 0.85rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #111827;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.trigger:hover:not(:disabled) {
+  background-color: #ffffff;
+  border-color: #9ca3af;
+}
+
+.trigger:focus-visible {
+  background-color: #ffffff;
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+}
+
+.trigger:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.icon {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  z-index: 1000;
+  min-width: 140px;
+  max-height: 260px;
+  overflow: hidden;
+}
+
+.viewport {
+  padding: 0.35rem;
+}
+
+.item {
+  font-size: 0.875rem;
+  color: #374151;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.item[data-highlighted] {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.item[data-state="checked"] {
+  font-weight: 700;
+  color: #111827;
+  background-color: #f0efec;
+}
+
+.itemIndicator {
+  color: #111827;
+  display: flex;
+  align-items: center;
+}

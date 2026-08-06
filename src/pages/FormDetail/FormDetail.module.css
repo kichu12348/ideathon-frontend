@@ -1,0 +1,207 @@
+.page {
+  min-height: calc(100vh - 60px);
+  padding: 2rem 1.5rem;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.topNav {
+  margin-bottom: 1.5rem;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  color: #4b5563;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  margin-left: -0.6rem;
+  transition: all 0.15s ease;
+}
+
+.backButton:hover {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.headerTitleGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.iconContainer {
+  background-color: #111827;
+  color: #ffffff;
+  padding: 0.75rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.formIdTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #111827;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-top: 0.2rem;
+}
+
+.iconButton {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.iconButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  color: #111827;
+  border-color: #9ca3af;
+}
+
+.skeletonContainer {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.skeletonHeader {
+  width: 40%;
+  height: 1.5rem;
+}
+
+.skeletonBlock {
+  width: 100%;
+  height: 4rem;
+}
+
+.skeletonFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.skeletonButton {
+  width: 140px;
+  height: 2.5rem;
+  border-radius: 8px;
+}
+
+.errorState {
+  background: #ffffff;
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.errorIcon {
+  color: #ef4444;
+}
+
+.errorState h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.errorState p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  max-width: 400px;
+}
+
+.retryButton {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #111827;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.retryButton:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive Breakpoints */
+@media screen and (max-width: 640px) {
+  .page {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .formIdTitle {
+    font-size: 1.4rem;
+  }
+
+  .header {
+    gap: 0.75rem;
+  }
+
+  .iconContainer {
+    padding: 0.55rem;
+  }
+}

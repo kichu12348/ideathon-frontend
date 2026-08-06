@@ -28,6 +28,16 @@ const EventTeamDetail = lazy(() =>
     default: m.EventTeamDetail,
   })),
 );
+const FormsList = lazy(() =>
+  import("./pages/FormsList/FormsList").then((m) => ({
+    default: m.FormsList,
+  })),
+);
+const FormDetail = lazy(() =>
+  import("./pages/FormDetail/FormDetail").then((m) => ({
+    default: m.FormDetail,
+  })),
+);
 const RedirectsList = lazy(() =>
   import("./pages/RedirectsList/RedirectsList").then((m) => ({
     default: m.RedirectsList,
@@ -39,7 +49,7 @@ const RedirectEdit = lazy(() =>
   })),
 );
 
-// Layout that includes the Header — used by the non-redirects section
+// Layout that includes the Header — used by the main admin section
 const MainLayout = () => (
   <>
     <Header />
@@ -71,6 +81,8 @@ function App() {
           <Route path="/events" element={<EventsList />} />
           <Route path="/events/:eventName" element={<EventDetail />} />
           <Route path="/events/:eventName/:id" element={<EventTeamDetail />} />
+          <Route path="/forms" element={<FormsList />} />
+          <Route path="/forms/:formId" element={<FormDetail />} />
         </Route>
         <Route element={<BareLayout />}>
           <Route path="/redirects" element={<RedirectsList />} />
