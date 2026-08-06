@@ -3,6 +3,7 @@ import { FiSave, FiRefreshCw, FiCalendar, FiFileText } from "react-icons/fi";
 import { Switch } from "../../ui/Switch";
 import { DateTimePicker } from "../../ui/DateTimePicker";
 import { getFormatedHumanDate } from "../../../utils/date";
+import { sanitizeFormId } from "../../../utils/sanitize";
 import styles from "./FormValidityForm.module.css";
 
 export interface FormValidityFormProps {
@@ -34,6 +35,12 @@ export const FormValidityForm: React.FC<FormValidityFormProps> = ({
     }
   };
 
+  const handleBlur = () => {
+    if (onFormIdChange && formId) {
+      onFormIdChange(sanitizeFormId(formId));
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
       {/* Form ID Identifier Section */}
@@ -43,7 +50,7 @@ export const FormValidityForm: React.FC<FormValidityFormProps> = ({
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Form Identifier</h2>
               <p className={styles.sectionDescription}>
-                Unique identifier for this form in the system.
+                Unique identifier for this form in the system. Spaces will be automatically converted to hyphens.
               </p>
             </div>
             <div className={styles.inputGroup}>
@@ -56,6 +63,7 @@ export const FormValidityForm: React.FC<FormValidityFormProps> = ({
                 className={styles.textInput}
                 value={formId}
                 onChange={(e) => onFormIdChange(e.target.value)}
+                onBlur={handleBlur}
                 disabled={isSaving}
                 placeholder="e.g. registration-form"
               />

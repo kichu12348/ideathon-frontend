@@ -86,4 +86,21 @@ export const formService = {
       body: JSON.stringify(newPayload),
     });
   },
+
+  /** Delete validity settings for a specific form */
+  deleteFormValidity: async (formId: string): Promise<void> => {
+    try {
+      await request<void>(`/${encodeURIComponent(formId)}/validity`, {
+        method: "DELETE",
+      });
+    } catch (err) {
+      if (err instanceof ApiError && (err.status === 404 || err.status === 405)) {
+        await request<void>(`/${encodeURIComponent(formId)}`, {
+          method: "DELETE",
+        });
+        return;
+      }
+      throw err;
+    }
+  },
 };

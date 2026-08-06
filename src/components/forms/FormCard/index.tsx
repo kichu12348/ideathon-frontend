@@ -1,18 +1,28 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FiArrowRight, FiFileText } from "react-icons/fi";
+import { FiFileText, FiTrash2 } from "react-icons/fi";
 import type { FormItem } from "../../../types/form";
 import styles from "./FormCard.module.css";
 
 export interface FormCardProps {
   form: FormItem;
+  onDelete?: (formId: string) => void;
 }
 
-export const FormCard: React.FC<FormCardProps> = ({ form }) => {
+export const FormCard: React.FC<FormCardProps> = ({ form, onDelete }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
     navigate(`/forms/${encodeURIComponent(form.form_id)}`);
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (
+      window.confirm(`Are you sure you want to delete form "${form.form_id}"?`)
+    ) {
+      onDelete?.(form.form_id);
+    }
   };
 
   return (
@@ -34,10 +44,22 @@ export const FormCard: React.FC<FormCardProps> = ({ form }) => {
         </div>
         <div className={styles.details}>
           <h3 className={styles.formId}>{form.form_id}</h3>
-          <span className={styles.subtext}>Click to manage validity settings</span>
+          <span className={styles.subtext}>
+            Click to manage validity settings
+          </span>
         </div>
       </div>
       <div className={styles.cardFooter}>
+        {onDelete && (
+          <button
+            className={styles.deleteButton}
+            onClick={handleDelete}
+            title="Delete form"
+            type="button"
+          >
+            <FiTrash2 size={16} />
+          </button>
+        )}
         <button
           className={styles.manageButton}
           onClick={(e) => {
@@ -47,7 +69,6 @@ export const FormCard: React.FC<FormCardProps> = ({ form }) => {
           type="button"
         >
           <span>Manage</span>
-          <FiArrowRight size={16} />
         </button>
       </div>
     </div>

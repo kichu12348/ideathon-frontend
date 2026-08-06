@@ -3,6 +3,7 @@ import { FiPlus, FiRefreshCw, FiCalendar } from "react-icons/fi";
 import { Dialog } from "../../ui/Dialog";
 import { Switch } from "../../ui/Switch";
 import { DateTimePicker } from "../../ui/DateTimePicker";
+import { sanitizeFormId, sanitizeFormIdLive } from "../../../utils/sanitize";
 import type { UpdateFormValidityPayload } from "../../../types/form";
 import styles from "./CreateFormModal.module.css";
 
@@ -41,18 +42,28 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
     onOpenChange(newOpen);
   };
 
+  const handleFormIdChange = (value: string) => {
+    const sanitizedLive = sanitizeFormIdLive(value);
+    setFormId(sanitizedLive);
+    if (errorMsg) setErrorMsg("");
+  };
+
+  const handleFormIdBlur = () => {
+    setFormId((prev) => sanitizeFormId(prev));
+  };
+
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault();
-    const trimmedId = formId.trim();
-    if (!trimmedId) {
-      setErrorMsg("Form ID is required.");
+    const finalFormId = sanitizeFormId(formId);
+    if (!finalFormId) {
+      setErrorMsg("Form ID is required and must contain valid characters.");
       return;
     }
 
     try {
       setIsSubmitting(true);
       setErrorMsg("");
-      const success = await onCreate(trimmedId, {
+      const success = await onCreate(finalFormId, {
         is_valid: isValid,
         close_time: closeTime,
       });
@@ -89,10 +100,8 @@ export const CreateFormModal: React.FC<CreateFormModalProps> = ({
             type="text"
             placeholder="e.g. ideathon-2026-registration"
             value={formId}
-            onChange={(e) => {
-              setFormId(e.target.value);
-              if (errorMsg) setErrorMsg("");
-            }}
+            onChange={(e) => handleFormIdChange(e.target.value)}
+            onBlur={handleFormIdBlur}
             disabled={isSubmitting}
             className={styles.textInput}
             autoFocus

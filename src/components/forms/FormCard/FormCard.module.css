@@ -62,8 +62,28 @@
 .cardFooter {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
   padding-top: 0.875rem;
   border-top: 1px solid #f3f4f6;
+}
+
+.deleteButton {
+  background: transparent;
+  color: #dc2626;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.deleteButton:hover {
+  background-color: #fef2f2;
+  border-color: #dc2626;
 }
 
 .manageButton {

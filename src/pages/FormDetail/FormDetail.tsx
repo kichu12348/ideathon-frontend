@@ -4,6 +4,7 @@ import {
   FiRefreshCw,
   FiAlertCircle,
   FiFileText,
+  FiTrash2,
 } from "react-icons/fi";
 import { useFormValidity } from "../../hooks/useFormValidity";
 import { FormValidityForm } from "../../components/forms/FormValidityForm";
@@ -22,11 +23,13 @@ export const FormDetail = () => {
     closeTime,
     isLoading,
     isSaving,
+    isDeleting,
     error,
     isDirty,
     setIsValid,
     setCloseTime,
     saveValidity,
+    deleteValidity,
     refetch,
   } = useFormValidity(decodedRouteFormId);
 
@@ -34,6 +37,16 @@ export const FormDetail = () => {
     const savedId = await saveValidity();
     if (savedId && savedId !== decodedRouteFormId) {
       navigate(`/forms/${encodeURIComponent(savedId)}`, { replace: true });
+    }
+  };
+
+  const handleDelete = async () => {
+    const targetId = currentFormId || decodedRouteFormId;
+    if (window.confirm(`Are you sure you want to delete form "${targetId}"?`)) {
+      const deleted = await deleteValidity();
+      if (deleted) {
+        navigate("/forms");
+      }
     }
   };
 
@@ -68,15 +81,26 @@ export const FormDetail = () => {
               </p>
             </div>
           </div>
-          <button
-            type="button"
-            className={styles.iconButton}
-            onClick={refetch}
-            disabled={isLoading || isSaving}
-            title="Refresh form settings"
-          >
-            <FiRefreshCw size={16} className={isLoading ? styles.spin : ""} />
-          </button>
+          <div className={styles.headerActions}>
+            <button
+              type="button"
+              className={styles.deleteIconButton}
+              onClick={handleDelete}
+              disabled={isLoading || isSaving || isDeleting}
+              title="Delete form"
+            >
+              <FiTrash2 size={16} />
+            </button>
+            <button
+              type="button"
+              className={styles.iconButton}
+              onClick={refetch}
+              disabled={isLoading || isSaving || isDeleting}
+              title="Refresh form settings"
+            >
+              <FiRefreshCw size={16} className={isLoading ? styles.spin : ""} />
+            </button>
+          </div>
         </div>
 
         {/* Content Body */}

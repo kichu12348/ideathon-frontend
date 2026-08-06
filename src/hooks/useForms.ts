@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { formService } from "../api/formService";
+import { sanitizeFormId } from "../utils/sanitize";
 import type { FormItem, UpdateFormValidityPayload } from "../types/form";
 
 export function useForms() {
@@ -28,20 +29,36 @@ export function useForms() {
     fetchForms();
   }, [fetchForms]);
 
-  const createForm = async (formId: string, payload: UpdateFormValidityPayload): Promise<boolean> => {
-    const trimmedId = formId.trim();
-    if (!trimmedId) {
-      toast.error("Form ID is required");
+  const createForm = async (
+    formId: string,
+    payload: UpdateFormValidityPayload,
+  ): Promise<boolean> => {
+    const sanitizedId = sanitizeFormId(formId);
+    if (!sanitizedId) {
+      toast.error("Form ID is required and must contain valid characters");
       return false;
     }
 
     try {
-      await formService.updateFormValidity(trimmedId, payload);
-      toast.success(`Form "${trimmedId}" validity settings created successfully`);
+      await formService.updateFormValidity(sanitizedId, payload);
+      toast.success(`Form "${sanitizedId}" validity record created`);
       await fetchForms();
       return true;
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Failed to create form validity";
+      toast.error(msg);
+      return false;
+    }
+  };
+
+  const deleteForm = async (formId: string): Promise<boolean> => {
+    try {
+      await formService.deleteFormValidity(formId);
+      toast.success(`Form "${formId}" deleted successfully`);
+      await fetchForms();
+      return true;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Failed to delete form";
       toast.error(msg);
       return false;
     }
@@ -60,5 +77,6 @@ export function useForms() {
     setSearchTerm,
     refetch: fetchForms,
     createForm,
+    deleteForm,
   };
 }

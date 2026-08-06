@@ -2,19 +2,23 @@ import { useState, useEffect, useCallback } from "react";
 import toast from "react-hot-toast";
 import { formService } from "../api/formService";
 import { formatToDatetimeLocal } from "../utils/date";
+import { sanitizeFormId, sanitizeFormIdLive } from "../utils/sanitize";
 
 export function useFormValidity(initialFormId: string | undefined) {
-  const [currentFormId, setCurrentFormId] = useState<string>(initialFormId || "");
+  const [currentFormId, setCurrentFormId] = useState<string>(
+    initialFormId ? sanitizeFormId(initialFormId) : "",
+  );
   const [isValid, setIsValid] = useState<boolean>(true);
   const [closeTime, setCloseTime] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
   useEffect(() => {
     if (initialFormId) {
-      setCurrentFormId(initialFormId);
+      setCurrentFormId(sanitizeFormId(initialFormId));
     }
   }, [initialFormId]);
 
@@ -40,8 +44,10 @@ export function useFormValidity(initialFormId: string | undefined) {
     fetchValidity();
   }, [fetchValidity]);
 
-  const handleSetFormId = (id: string) => {
-    setCurrentFormId(id);
+  const handleSetFormId = (rawId: string) => {
+    // Apply live sanitization
+    const sanitizedLive = sanitizeFormIdLive(rawId);
+    setCurrentFormId(sanitizedLive);
     setIsDirty(true);
   };
 
@@ -56,11 +62,14 @@ export function useFormValidity(initialFormId: string | undefined) {
   };
 
   const saveValidity = async (targetId?: string): Promise<string | null> => {
-    const finalFormId = (targetId || currentFormId).trim();
+    const rawToSanitize = targetId || currentFormId;
+    const finalFormId = sanitizeFormId(rawToSanitize);
+
     if (!finalFormId) {
       toast.error("Form ID cannot be empty");
       return null;
     }
+
     try {
       setIsSaving(true);
       setError(null);
@@ -68,6 +77,7 @@ export function useFormValidity(initialFormId: string | undefined) {
         is_valid: isValid,
         close_time: closeTime,
       });
+      setCurrentFormId(finalFormId);
       toast.success(`Form "${finalFormId}" validity settings saved successfully!`);
       setIsDirty(false);
       return finalFormId;
@@ -81,6 +91,23 @@ export function useFormValidity(initialFormId: string | undefined) {
     }
   };
 
+  const deleteValidity = async (): Promise<boolean> => {
+    const targetId = currentFormId || initialFormId;
+    if (!targetId) return false;
+    try {
+      setIsDeleting(true);
+      await formService.deleteFormValidity(targetId);
+      toast.success(`Form "${targetId}" deleted successfully`);
+      return true;
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Failed to delete form";
+      toast.error(msg);
+      return false;
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return {
     formId: currentFormId,
     setFormId: handleSetFormId,
@@ -88,11 +115,13 @@ export function useFormValidity(initialFormId: string | undefined) {
     closeTime,
     isLoading,
     isSaving,
+    isDeleting,
     error,
     isDirty,
     setIsValid: handleSetIsValid,
     setCloseTime: handleSetCloseTime,
     saveValidity,
+    deleteValidity,
     refetch: fetchValidity,
   };
 }

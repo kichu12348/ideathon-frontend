@@ -15,6 +15,7 @@ export const FormsList = () => {
     setSearchTerm,
     refetch,
     createForm,
+    deleteForm,
   } = useForms();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -102,7 +103,11 @@ export const FormsList = () => {
         ) : forms.length > 0 ? (
           <div className={styles.grid}>
             {forms.map((form) => (
-              <FormCard key={form.form_id} form={form} />
+              <FormCard
+                key={form.form_id}
+                form={form}
+                onDelete={deleteForm}
+              />
             ))}
           </div>
         ) : (
