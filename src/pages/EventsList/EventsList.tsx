@@ -50,39 +50,41 @@ export const EventsList = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>All Events</h1>
-      {events.length === 0 ? (
-        <p>No events found.</p>
-      ) : (
-        <div className={styles.grid}>
-          {events.map((event) => (
-            <div key={event.eventName} className={styles.card}>
-              <div className={styles.eventName}>
-                {event.eventName.replace(/-/g, " ")}
-              </div>
-              <div className={styles.gamesInfo}>
-                <p>Games Included:</p>
-                <div className={styles.gamesList}>
-                  {event.games.map((game) => (
-                    <span key={game} className={styles.gameBadge}>
-                      {game}
-                    </span>
-                  ))}
+    <div className={styles.pageContainer}>
+      <div className={styles.container}>
+        <h1 className={styles.title}>All Events</h1>
+        {events.length === 0 ? (
+          <p>No events found.</p>
+        ) : (
+          <div className={styles.grid}>
+            {events.map((event) => (
+              <div key={event.eventName} className={styles.card}>
+                <div className={styles.eventName}>
+                  {event.eventName.replace(/-/g, " ")}
+                </div>
+                <div className={styles.gamesInfo}>
+                  <p>Games Included:</p>
+                  <div className={styles.gamesList}>
+                    {event.games.map((game) => (
+                      <span key={game} className={styles.gameBadge}>
+                        {game}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className={styles.cardFooter}>
+                  <Link
+                    to={`/events/${event.eventName}`}
+                    className={styles.viewButton}
+                  >
+                    View Event
+                  </Link>
                 </div>
               </div>
-              <div className={styles.cardFooter}>
-                <Link
-                  to={`/events/${event.eventName}`}
-                  className={styles.viewButton}
-                >
-                  View Event
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

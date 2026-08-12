@@ -269,267 +269,269 @@ export const RedirectEdit = () => {
         </div>
       </div>
 
-      <div className={styles.container}>
-        {/* Main link form */}
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>
-            {isNew ? "Create Link" : "Main Link"}
-          </h2>
+      <div className="pageContainer">
+        <div className={styles.container}>
+          {/* Main link form */}
+          <section className={styles.section}>
+            <h2 className={styles.sectionTitle}>
+              {isNew ? "Create Link" : "Main Link"}
+            </h2>
 
-          {/* Public URL — visible & copyable when editing */}
-          {!isNew && slug && (
-            <div className={styles.publicUrlBar}>
-              <FiLink size={14} className={styles.publicUrlIcon} />
-              <span className={styles.publicUrlText}>
-                {buildRedirectUrl(slug)}
-              </span>
-              <button
-                type="button"
-                className={styles.copyBtn}
-                onClick={handleCopyMain}
-                title="Copy URL"
-              >
-                {mainCopied ? <FiCheck size={13} /> : <FiCopy size={13} />}
-              </button>
-            </div>
-          )}
+            {/* Public URL — visible & copyable when editing */}
+            {!isNew && slug && (
+              <div className={styles.publicUrlBar}>
+                <FiLink size={14} className={styles.publicUrlIcon} />
+                <span className={styles.publicUrlText}>
+                  {buildRedirectUrl(slug)}
+                </span>
+                <button
+                  type="button"
+                  className={styles.copyBtn}
+                  onClick={handleCopyMain}
+                  title="Copy URL"
+                >
+                  {mainCopied ? <FiCheck size={13} /> : <FiCopy size={13} />}
+                </button>
+              </div>
+            )}
 
-          <form onSubmit={handleSaveMain} className={styles.form}>
-            <div className={styles.formRow}>
-              <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="slug">
-                  Slug
-                </label>
-                <div className={styles.inputPrefix}>
-                  <span className={styles.prefix}>/</span>
+            <form onSubmit={handleSaveMain} className={styles.form}>
+              <div className={styles.formRow}>
+                <div className={styles.formGroup}>
+                  <label className={styles.label} htmlFor="slug">
+                    Slug
+                  </label>
+                  <div className={styles.inputPrefix}>
+                    <span className={styles.prefix}>/</span>
+                    <input
+                      id="slug"
+                      className={styles.input}
+                      type="text"
+                      value={mainSlug}
+                      onChange={(e) => setMainSlug(cleanSlug(e.target.value))}
+                      onBlur={(e) => setMainSlug(cleanEndSlug(e.target.value))}
+                      disabled={isSaving}
+                      placeholder="my-link"
+                      pattern="[a-zA-Z0-9_\-]{1,64}"
+                      title="Letters, numbers, dashes and underscores only (max 64)"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.label} htmlFor="redirect">
+                    Redirect URL
+                  </label>
                   <input
-                    id="slug"
+                    id="redirect"
                     className={styles.input}
-                    type="text"
-                    value={mainSlug}
-                    onChange={(e) => setMainSlug(cleanSlug(e.target.value))}
-                    onBlur={(e) => setMainSlug(cleanEndSlug(e.target.value))}
+                    type="url"
+                    value={mainRedirect}
+                    onChange={(e) => setMainRedirect(e.target.value.trim())}
+                    onBlur={(e) => setMainRedirect(e.target.value.trim())}
                     disabled={isSaving}
-                    placeholder="my-link"
-                    pattern="[a-zA-Z0-9_\-]{1,64}"
-                    title="Letters, numbers, dashes and underscores only (max 64)"
+                    placeholder="https://example.com"
                     required
                   />
                 </div>
               </div>
-              <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor="redirect">
-                  Redirect URL
-                </label>
-                <input
-                  id="redirect"
-                  className={styles.input}
-                  type="url"
-                  value={mainRedirect}
-                  onChange={(e) => setMainRedirect(e.target.value.trim())}
-                  onBlur={(e) => setMainRedirect(e.target.value.trim())}
-                  disabled={isSaving}
-                  placeholder="https://example.com"
-                  required
-                />
-              </div>
-            </div>
 
-            <div className={styles.formActions}>
-              <button
-                type="submit"
-                className={styles.primaryBtn}
-                disabled={isSaving}
-              >
-                <FiSave size={16} />
-                <span>{isNew ? "Create" : "Save Changes"}</span>
-              </button>
-              {!isNew && (
+              <div className={styles.formActions}>
                 <button
-                  type="button"
-                  className={styles.dangerBtn}
-                  onClick={handleDeleteMain}
+                  type="submit"
+                  className={styles.primaryBtn}
                   disabled={isSaving}
                 >
-                  <FiTrash2 size={16} />
-                  <span>Delete Link</span>
+                  <FiSave size={16} />
+                  <span>{isNew ? "Create" : "Save Changes"}</span>
                 </button>
-              )}
-            </div>
-          </form>
-        </section>
-
-        {/* Sub-links section — only when editing */}
-        {!isNew && (
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Sub Links</h2>
-              {!subFormVisible && (
-                <button
-                  className={styles.addSubBtn}
-                  onClick={() => openSubForm()}
-                >
-                  <FiPlus size={15} />
-                  <span>Add Sub Link</span>
-                </button>
-              )}
-            </div>
-
-            {/* Sub-link form (inline) */}
-            {subFormVisible && (
-              <div className={styles.subForm}>
-                <div className={styles.subFormHeader}>
-                  <h3>
-                    {editingSubSlug
-                      ? `Edit /${editingSubSlug}`
-                      : "New Sub Link"}
-                  </h3>
-                  <button className={styles.closeBtn} onClick={closeSubForm}>
-                    <FiX size={16} />
-                  </button>
-                </div>
-                <form onSubmit={handleSaveSub}>
-                  <div
-                    className={styles.formRow}
-                    style={{
-                      marginBottom: "1rem",
-                    }}
+                {!isNew && (
+                  <button
+                    type="button"
+                    className={styles.dangerBtn}
+                    onClick={handleDeleteMain}
+                    disabled={isSaving}
                   >
-                    <div className={styles.formGroup}>
-                      <label className={styles.label} htmlFor="subSlug">
-                        Sub Slug
-                      </label>
-                      <div className={styles.inputPrefix}>
-                        <span className={styles.prefix}>/{slug}/</span>
+                    <FiTrash2 size={16} />
+                    <span>Delete Link</span>
+                  </button>
+                )}
+              </div>
+            </form>
+          </section>
+
+          {/* Sub-links section — only when editing */}
+          {!isNew && (
+            <section className={styles.section}>
+              <div className={styles.sectionHeader}>
+                <h2 className={styles.sectionTitle}>Sub Links</h2>
+                {!subFormVisible && (
+                  <button
+                    className={styles.addSubBtn}
+                    onClick={() => openSubForm()}
+                  >
+                    <FiPlus size={15} />
+                    <span>Add Sub Link</span>
+                  </button>
+                )}
+              </div>
+
+              {/* Sub-link form (inline) */}
+              {subFormVisible && (
+                <div className={styles.subForm}>
+                  <div className={styles.subFormHeader}>
+                    <h3>
+                      {editingSubSlug
+                        ? `Edit /${editingSubSlug}`
+                        : "New Sub Link"}
+                    </h3>
+                    <button className={styles.closeBtn} onClick={closeSubForm}>
+                      <FiX size={16} />
+                    </button>
+                  </div>
+                  <form onSubmit={handleSaveSub}>
+                    <div
+                      className={styles.formRow}
+                      style={{
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="subSlug">
+                          Sub Slug
+                        </label>
+                        <div className={styles.inputPrefix}>
+                          <span className={styles.prefix}>/{slug}/</span>
+                          <input
+                            id="subSlug"
+                            className={styles.input}
+                            type="text"
+                            value={subSlugInput}
+                            onChange={(e) =>
+                              setSubSlugInput(cleanSlug(e.target.value))
+                            }
+                            onBlur={(e) =>
+                              setSubSlugInput(cleanEndSlug(e.target.value))
+                            }
+                            disabled={subSaving}
+                            placeholder="sub"
+                            pattern="[a-zA-Z0-9_\-]{1,64}"
+                            title="Letters, numbers, dashes and underscores only (max 64)"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className={styles.formGroup}>
+                        <label className={styles.label} htmlFor="subRedirect">
+                          Redirect URL
+                        </label>
                         <input
-                          id="subSlug"
+                          id="subRedirect"
                           className={styles.input}
-                          type="text"
-                          value={subSlugInput}
+                          type="url"
+                          value={subRedirectInput}
                           onChange={(e) =>
-                            setSubSlugInput(cleanSlug(e.target.value))
+                            setSubRedirectInput(e.target.value.trim())
                           }
                           onBlur={(e) =>
-                            setSubSlugInput(cleanEndSlug(e.target.value))
+                            setSubRedirectInput(e.target.value.trim())
                           }
                           disabled={subSaving}
-                          placeholder="sub"
-                          pattern="[a-zA-Z0-9_\-]{1,64}"
-                          title="Letters, numbers, dashes and underscores only (max 64)"
+                          placeholder="https://example.com/sub"
                           required
                         />
                       </div>
                     </div>
-                    <div className={styles.formGroup}>
-                      <label className={styles.label} htmlFor="subRedirect">
-                        Redirect URL
-                      </label>
-                      <input
-                        id="subRedirect"
-                        className={styles.input}
-                        type="url"
-                        value={subRedirectInput}
-                        onChange={(e) =>
-                          setSubRedirectInput(e.target.value.trim())
-                        }
-                        onBlur={(e) =>
-                          setSubRedirectInput(e.target.value.trim())
-                        }
+                    <div className={styles.formActions}>
+                      <button
+                        type="submit"
+                        className={styles.primaryBtn}
                         disabled={subSaving}
-                        placeholder="https://example.com/sub"
-                        required
-                      />
+                      >
+                        <FiSave size={16} />
+                        <span>{editingSubSlug ? "Update" : "Create"}</span>
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.ghostBtn}
+                        onClick={closeSubForm}
+                      >
+                        Cancel
+                      </button>
                     </div>
-                  </div>
-                  <div className={styles.formActions}>
-                    <button
-                      type="submit"
-                      className={styles.primaryBtn}
-                      disabled={subSaving}
-                    >
-                      <FiSave size={16} />
-                      <span>{editingSubSlug ? "Update" : "Create"}</span>
-                    </button>
-                    <button
-                      type="button"
-                      className={styles.ghostBtn}
-                      onClick={closeSubForm}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-              </div>
-            )}
+                  </form>
+                </div>
+              )}
 
-            {/* Sub-links list */}
-            {subsLoading ? (
-              <div className={styles.subList}>
-                {[1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className={`${styles.subCard} skeleton`}
-                    style={{ height: "62px" }}
-                  />
-                ))}
-              </div>
-            ) : subLinks.length > 0 ? (
-              <div className={styles.subList}>
-                {subLinks.map((sub) => (
-                  <div key={sub.slug} className={styles.subCard}>
-                    <div className={styles.subLeft}>
-                      <div className={styles.subSlugRow}>
-                        <span
-                          className={styles.subSlugBadge}
-                          title={buildSubRedirectUrl(slug!, sub.slug)}
-                        >
-                          <span className={styles.subSlugBase}>
-                            {buildRedirectUrl(slug!)}
+              {/* Sub-links list */}
+              {subsLoading ? (
+                <div className={styles.subList}>
+                  {[1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className={`${styles.subCard} skeleton`}
+                      style={{ height: "62px" }}
+                    />
+                  ))}
+                </div>
+              ) : subLinks.length > 0 ? (
+                <div className={styles.subList}>
+                  {subLinks.map((sub) => (
+                    <div key={sub.slug} className={styles.subCard}>
+                      <div className={styles.subLeft}>
+                        <div className={styles.subSlugRow}>
+                          <span
+                            className={styles.subSlugBadge}
+                            title={buildSubRedirectUrl(slug!, sub.slug)}
+                          >
+                            <span className={styles.subSlugBase}>
+                              {buildRedirectUrl(slug!)}
+                            </span>
+                            /{sub.slug}
                           </span>
-                          /{sub.slug}
-                        </span>
+                          <button
+                            className={styles.copyBtn}
+                            onClick={(e) => handleCopySub(sub.slug, e)}
+                            title="Copy URL"
+                          >
+                            {copiedSub === sub.slug ? (
+                              <FiCheck size={12} />
+                            ) : (
+                              <FiCopy size={12} />
+                            )}
+                          </button>
+                        </div>
+                        <p className={styles.subRedirectUrl}>{sub.redirect}</p>
+                      </div>
+                      <div className={styles.subActions}>
                         <button
-                          className={styles.copyBtn}
-                          onClick={(e) => handleCopySub(sub.slug, e)}
-                          title="Copy URL"
+                          className={styles.iconActionBtn}
+                          onClick={() => openSubForm(sub)}
+                          title="Edit"
                         >
-                          {copiedSub === sub.slug ? (
-                            <FiCheck size={12} />
-                          ) : (
-                            <FiCopy size={12} />
-                          )}
+                          <FiEdit2 size={14} />
+                        </button>
+                        <button
+                          className={`${styles.iconActionBtn} ${styles.danger}`}
+                          onClick={() => handleDeleteSub(sub.slug)}
+                          title="Delete"
+                        >
+                          <FiTrash2 size={14} />
                         </button>
                       </div>
-                      <p className={styles.subRedirectUrl}>{sub.redirect}</p>
                     </div>
-                    <div className={styles.subActions}>
-                      <button
-                        className={styles.iconActionBtn}
-                        onClick={() => openSubForm(sub)}
-                        title="Edit"
-                      >
-                        <FiEdit2 size={14} />
-                      </button>
-                      <button
-                        className={`${styles.iconActionBtn} ${styles.danger}`}
-                        onClick={() => handleDeleteSub(sub.slug)}
-                        title="Delete"
-                      >
-                        <FiTrash2 size={14} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              !subFormVisible && (
-                <p className={styles.emptyText}>
-                  No sub-links yet. Add one above.
-                </p>
-              )
-            )}
-          </section>
-        )}
+                  ))}
+                </div>
+              ) : (
+                !subFormVisible && (
+                  <p className={styles.emptyText}>
+                    No sub-links yet. Add one above.
+                  </p>
+                )
+              )}
+            </section>
+          )}
+        </div>
       </div>
     </div>
   );

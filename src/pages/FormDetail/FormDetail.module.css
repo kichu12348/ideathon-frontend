@@ -1,5 +1,11 @@
+.pageContainer {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+}
+
 .page {
-  min-height: calc(100vh - 60px);
   padding: 2rem 1.5rem;
 }
 

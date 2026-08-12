@@ -30,6 +30,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
+  overflow: hidden;
   /* hide scrollbar, only show when scrolling */
 }
 
@@ -61,4 +62,11 @@ a {
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;
   border-radius: 4px;
+}
+
+.pageContainer {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
 }
