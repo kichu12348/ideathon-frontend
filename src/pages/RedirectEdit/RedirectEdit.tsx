@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import {
-  FiArrowLeft,
+  FiChevronLeft,
   FiTrash2,
   FiPlus,
   FiSave,
@@ -260,7 +260,7 @@ export const RedirectEdit = () => {
       <div className={styles.topBar}>
         <div className={styles.topBarInner}>
           <Link to="/redirects" className={styles.backBtn}>
-            <FiArrowLeft size={16} />
+            <FiChevronLeft className={styles.backIcon} size={18} />
             <span>Redirects</span>
           </Link>
           <span className={styles.topBarTitle}>

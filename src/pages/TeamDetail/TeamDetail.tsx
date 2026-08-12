@@ -7,6 +7,7 @@ import { buildBucketUrl } from "../../config/redirect";
 import type { TeamDetailResponse } from "../../types/api";
 import ImageModal from "../../components/ImageModal";
 import styles from "./TeamDetail.module.css";
+import { FiChevronLeft } from "react-icons/fi";
 
 const TooltipValue = ({ value }: { value: string }) => (
   <Tooltip.Provider delayDuration={300}>
@@ -29,7 +30,6 @@ export const TeamDetail = () => {
   const [data, setData] = useState<TeamDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTeamDetail = async () => {
@@ -73,7 +73,8 @@ export const TeamDetail = () => {
     return (
       <div className={styles.container}>
         <Link to="/" className={styles.backButton}>
-          &larr; Back to Teams
+          <FiChevronLeft className={styles.backIcon} size={18} />
+          <span>Back to Teams</span>
         </Link>
         <div className={styles.error}>Error: {error || "Team not found"}</div>
       </div>
@@ -83,130 +84,134 @@ export const TeamDetail = () => {
   const { team, members } = data;
 
   return (
-    <div className={styles.container}>
-      <Link to="/" className={styles.backButton}>
-        &larr; Back to Teams
-      </Link>
+    <div className={styles.pageContainer}>
+      <div className={styles.container}>
+        <Link to="/" className={styles.backButton}>
+          <FiChevronLeft className={styles.backIcon} size={18} />
+          <span>Back to Teams</span>
+        </Link>
 
-      <div className={styles.header}>
-        <h1 className={styles.title}>{team.team_name}</h1>
-        <div className={styles.date}>
-          Registered on {new Date(team.created_at).toLocaleDateString()}
-        </div>
-      </div>
-
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Leader Information</h2>
-        <div className={styles.grid}>
-          <div className={styles.field}>
-            <span className={styles.label}>Name</span>
-            <TooltipValue value={team.leader_name} />
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>Email</span>
-            <TooltipValue value={team.leader_email} />
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>Phone</span>
-            <TooltipValue value={team.leader_phone} />
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>College</span>
-            <TooltipValue value={team.leader_college} />
+        <div className={styles.header}>
+          <h1 className={styles.title}>{team.team_name}</h1>
+          <div className={styles.date}>
+            Registered on {new Date(team.created_at).toLocaleDateString()}
           </div>
         </div>
-      </div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Registration Details</h2>
-        <div className={styles.grid}>
-          <div className={styles.field}>
-            <span className={styles.label}>UPI ID</span>
-            <TooltipValue value={team.upi_id} />
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>Referral Code</span>
-            <TooltipValue value={team.referral_code || "N/A"} />
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>Submission</span>
-            <span className={styles.value}>
-              {team.submission && team.submission.trim() !== "" ? (
-                <div className={styles.submissionRow}>
-                  <span className={styles.submissionDomain}>
-                    {new URL(team.submission).hostname.replace(/^www\./, "")}
-                  </span>
-                  <a
-                    href={team.submission}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.submissionBtn}
-                  >
-                    <FiExternalLink size={14} />
-                    Open
-                  </a>
-                </div>
-              ) : (
-                <span className={styles.noSubmission}>No submission yet</span>
-              )}
-            </span>
-          </div>
-          <div className={styles.field}>
-            <span className={styles.label}>Payment Screenshot</span>
-            <span className={styles.value}>
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsModalOpen(true);
-                }}
-              >
-                <img
-                  src={buildBucketUrl(team.payment_screenshot)}
-                  alt="Payment Receipt"
-                  className={styles.screenshot}
-                />
-              </a>
-            </span>
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Leader Information</h2>
+          <div className={styles.grid}>
+            <div className={styles.field}>
+              <span className={styles.label}>Name</span>
+              <TooltipValue value={team.leader_name} />
+            </div>
+            {team.gender?.trim() !== "" && (
+              <div className={styles.field}>
+                <span className={styles.label}>Gender</span>
+                <TooltipValue value={team.gender} />
+              </div>
+            )}
+            <div className={styles.field}>
+              <span className={styles.label}>Email</span>
+              <TooltipValue value={team.leader_email} />
+            </div>
+            <div className={styles.field}>
+              <span className={styles.label}>Phone</span>
+              <TooltipValue value={team.leader_phone} />
+            </div>
+            <div className={styles.field}>
+              <span className={styles.label}>College</span>
+              <TooltipValue value={team.leader_college} />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className={styles.section}>
-        <h2 className={styles.sectionTitle}>Team Members ({members.length})</h2>
-        {members.length === 0 ? (
-          <p>No members found for this team.</p>
-        ) : (
-          <div className={styles.tableContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>College</th>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((member) => (
-                  <tr key={member.id}>
-                    <td>{member.name}</td>
-                    <td>{member.email}</td>
-                    <td>{member.phone}</td>
-                    <td>{member.college}</td>
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Registration Details</h2>
+          <div className={styles.grid}>
+            <div className={styles.field}>
+              <span className={styles.label}>UPI ID</span>
+              <TooltipValue value={team.upi_id} />
+            </div>
+            <div className={styles.field}>
+              <span className={styles.label}>Referral Code</span>
+              <TooltipValue value={team.referral_code || "N/A"} />
+            </div>
+            <div className={styles.field}>
+              <span className={styles.label}>Submission</span>
+              <span className={styles.value}>
+                {team.submission && team.submission.trim() !== "" ? (
+                  <div className={styles.submissionRow}>
+                    <span className={styles.submissionDomain}>
+                      {new URL(team.submission).hostname.replace(/^www\./, "")}
+                    </span>
+                    <a
+                      href={team.submission}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.submissionBtn}
+                    >
+                      <FiExternalLink size={14} />
+                      Open
+                    </a>
+                  </div>
+                ) : (
+                  <span className={styles.noSubmission}>No submission yet</span>
+                )}
+              </span>
+            </div>
+            <div className={styles.field}>
+              <span className={styles.label}>Payment Screenshot</span>
+              <span className={styles.value}>
+                {team.payment_screenshot ? (
+                  <ImageModal
+                    src={buildBucketUrl(team.payment_screenshot)}
+                    alt="Payment Receipt"
+                  />
+                ) : (
+                  <span className={styles.noSubmission}>N/A</span>
+                )}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>
+            Team Members ({members.length})
+          </h2>
+          {members.length === 0 ? (
+            <p>No members found for this team.</p>
+          ) : (
+            <div className={styles.tableContainer}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>College</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+                </thead>
+                <tbody>
+                  {members.map((member) => (
+                    <tr key={member.id}>
+                      <td>{member.name}</td>
+                      <td>
+                        {member.gender?.trim() !== "" ? member.gender : "N/A"}
+                      </td>
+                      <td>{member.email}</td>
+                      <td>{member.phone}</td>
+                      <td>{member.college}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </div>
-      {team && (
-        <ImageModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          imageUrl={buildBucketUrl(team.payment_screenshot)}
-        />
-      )}
     </div>
   );
 };

@@ -1,3 +1,10 @@
+.pageContainer {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+}
+
 .container {
   max-width: 1000px;
   margin: 0 auto;
@@ -47,14 +54,42 @@
 }
 
 .backButton {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--accent-color);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-size: 0.875rem;
   font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .backButton:hover {
-  text-decoration: underline;
+  background-color: var(--muted-bg);
+  border-color: #cccccc;
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+}
+
+.backButton:active {
+  transform: scale(0.98);
+}
+
+.backIcon {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.backButton:hover .backIcon {
+  transform: translateX(-3px);
 }
 
 .section {

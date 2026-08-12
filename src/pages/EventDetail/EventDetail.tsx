@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { FiCheck as Check, FiChevronDown as ChevronDown } from "react-icons/fi";
+import { FiCheck as Check, FiChevronDown as ChevronDown, FiChevronLeft } from "react-icons/fi";
 import { eventService } from "../../api/eventService";
 import type { EventTeam, EventStatsResponse } from "../../types/events";
 import styles from "./EventDetail.module.css";
@@ -38,7 +38,10 @@ export const EventDetail = () => {
   if (loading) {
     return (
       <div className={styles.container}>
-        <Link to="/events" className={styles.backButton}>&larr; Back to Events</Link>
+        <Link to="/events" className={styles.backButton}>
+          <FiChevronLeft className={styles.backIcon} size={18} />
+          <span>Back to Events</span>
+        </Link>
         <div className={`skeleton ${styles.skeletonTitle}`} style={{ marginBottom: "2rem" }} />
         <div className={styles.statsGrid}>
           {[...Array(3)].map((_, i) => (
@@ -53,7 +56,10 @@ export const EventDetail = () => {
   if (error) {
     return (
       <div className={styles.container}>
-        <Link to="/events" className={styles.backButton}>&larr; Back to Events</Link>
+        <Link to="/events" className={styles.backButton}>
+          <FiChevronLeft className={styles.backIcon} size={18} />
+          <span>Back to Events</span>
+        </Link>
         <div className={styles.error}>Error: {error}</div>
       </div>
     );
@@ -67,7 +73,10 @@ export const EventDetail = () => {
 
   return (
     <div className={styles.container}>
-      <Link to="/events" className={styles.backButton}>&larr; Back to Events</Link>
+      <Link to="/events" className={styles.backButton}>
+        <FiChevronLeft className={styles.backIcon} size={18} />
+        <span>Back to Events</span>
+      </Link>
       
       <div className={styles.header}>
         <h1 className={styles.title}>{eventName?.replace(/-/g, ' ')} Registrations</h1>

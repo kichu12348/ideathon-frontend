@@ -1,3 +1,5 @@
+type GenderTypes = string | "";
+
 export interface Team {
   id: number;
   team_name: string;
@@ -5,6 +7,7 @@ export interface Team {
   leader_college: string;
   leader_email: string;
   leader_phone: string;
+  gender: GenderTypes;
   payment_screenshot: string;
   submission: string;
   upi_id: string;
@@ -19,6 +22,7 @@ export interface Member {
   email: string;
   phone: string;
   college: string;
+  gender: GenderTypes;
 }
 
 export interface TeamsResponse {

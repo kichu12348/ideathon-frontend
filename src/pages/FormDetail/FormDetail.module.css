@@ -13,24 +13,40 @@
 }
 
 .backButton {
-  background: transparent;
-  border: none;
-  color: #4b5563;
-  font-size: 0.9rem;
-  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  background-color: var(--surface-color, #ffffff);
+  border: 1px solid var(--border-color, #e5e7eb);
+  color: var(--text-color, #111827);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
-  padding: 0.4rem 0.6rem;
-  border-radius: 6px;
-  margin-left: -0.6rem;
-  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .backButton:hover {
-  background-color: #e5e7eb;
-  color: #111827;
+  background-color: var(--muted-bg, #f3f4f6);
+  border-color: #d1d5db;
+  color: var(--text-color, #111827);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.backButton:active {
+  transform: scale(0.98);
+}
+
+.backIcon {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.backButton:hover .backIcon {
+  transform: translateX(-3px);
 }
 
 .header {

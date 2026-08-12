@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
+import { FiChevronLeft } from "react-icons/fi";
 import { eventService } from "../../api/eventService";
 import { buildBucketUrl } from "../../config/redirect";
 import type { EventTeamDetailResponse } from "../../types/events";
@@ -11,7 +12,6 @@ export const EventTeamDetail = () => {
   const [data, setData] = useState<EventTeamDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTeamDetail = async () => {
@@ -55,7 +55,8 @@ export const EventTeamDetail = () => {
     return (
       <div className={styles.container}>
         <Link to={`/events/${eventName}`} className={styles.backButton}>
-          &larr; Back to Event
+          <FiChevronLeft className={styles.backIcon} size={18} />
+          <span>Back to Event</span>
         </Link>
         <div className={styles.error}>Error: {error || "Team not found"}</div>
       </div>
@@ -67,7 +68,8 @@ export const EventTeamDetail = () => {
   return (
     <div className={styles.container}>
       <Link to={`/events/${eventName}`} className={styles.backButton}>
-        &larr; Back to Event
+        <FiChevronLeft className={styles.backIcon} size={18} />
+        <span>Back to Event</span>
       </Link>
 
       <div className={styles.header}>
@@ -139,18 +141,14 @@ export const EventTeamDetail = () => {
           <div className={styles.field}>
             <span className={styles.label}>Payment Screenshot</span>
             <span className={styles.value}>
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsModalOpen(true);
-                }}
-              >
-                <img
+              {team.payment_screenshot ? (
+                <ImageModal
                   src={buildBucketUrl(team.payment_screenshot)}
                   alt="Payment Receipt"
-                  className={styles.screenshot}
                 />
-              </a>
+              ) : (
+                <span>N/A</span>
+              )}
             </span>
           </div>
         </div>
@@ -187,13 +185,6 @@ export const EventTeamDetail = () => {
           </div>
         )}
       </div>
-      {team && (
-        <ImageModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          imageUrl={buildBucketUrl(team.payment_screenshot)}
-        />
-      )}
     </div>
   );
 };

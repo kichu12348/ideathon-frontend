@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import {
-  FiArrowLeft,
+  FiChevronLeft,
   FiRefreshCw,
   FiAlertCircle,
   FiFileText,
@@ -60,7 +60,7 @@ export const FormDetail = () => {
             className={styles.backButton}
             onClick={() => navigate("/forms")}
           >
-            <FiArrowLeft size={16} />
+            <FiChevronLeft className={styles.backIcon} size={18} />
             <span>Back to Forms</span>
           </button>
         </div>
